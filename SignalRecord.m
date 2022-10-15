@@ -193,6 +193,7 @@ classdef SignalRecord
         end
         
         %% others
+        % Fourier analisis
         function obj = applyFourierAnalysis(obj)
             
         end
@@ -204,6 +205,9 @@ classdef SignalRecord
         function obj = fourierAnalysis(obj)
             
         end
+        
+        % Wave functions
+        
         
     end
 end
