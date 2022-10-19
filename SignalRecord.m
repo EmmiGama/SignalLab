@@ -88,6 +88,7 @@ classdef SignalRecord
         function obj = SignalRecord(name, duration, ydata , fdata, ddata)
             obj.name = name;
             obj.originalData.duration = duration;
+            obj.newData.duration = duration;
             
             if exist('ydata','var')
                 obj.originalData.ydata = ydata;
@@ -105,11 +106,11 @@ classdef SignalRecord
         %% setters
         function obj = setOriginalYData(obj, y, Fs, t)
             if ~exist('t','var')
-                t = linspace(0, obj.duration, length(y));
+                t = linspace(0, obj.originalData.duration, length(y));
             end
             
-            data.y = y;
             data.Fs = Fs;
+            data.y = y;
             data.t = t;
             
             obj.originalData.ydata = data;
@@ -130,9 +131,13 @@ classdef SignalRecord
             obj.originalData.ddata = data;
         end
         
+        function obj = setNewDuration(obj, duration)
+            obj.newData.duration = duration;
+        end
+        
         function obj = setNewYData(obj, y, Fs, t)
             if ~exist('t','var')
-                t = linspace(0, obj.duration, length(y));
+                t = linspace(0, obj.newData.duration, length(y));
             end
             
             data.y = y;
