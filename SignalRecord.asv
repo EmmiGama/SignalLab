@@ -122,15 +122,27 @@ classdef SignalRecord
         function obj = Amplify(obj)
             obj = obj.Amplifying();
             obj = obj.Filter();
+            'Amplify'
+            
+            obj.originalSignal.signal
+            obj.modifiedSignal.signal
         end
         
         function obj = Filter(obj)
             obj = obj.Filtering();
             obj = obj.Analyze();
+            'Filter'
+            
+            obj.originalSignal.fourier
+            obj.modifiedSignal.fourier
         end
         
         function obj = Analyze(obj)
             obj = obj.Analyzing();
+            'Analyze'
+            
+            obj.originalSignal.signal
+            obj.modifiedSignal.signal
         end
         
         %% hooks process
@@ -368,7 +380,7 @@ classdef SignalRecord
                 obj = obj.setModifiedFourier([0], [0]);
             end 
             
-            obj = obj.StateChange();
+            obj.StateChange();
         end
         
         function obj = updateFourierAnalisys(obj)
@@ -442,7 +454,7 @@ classdef SignalRecord
                 obj.filters.low.lim = 0;
             end
             
-            obj = obj.StateChange()
+            obj.StateChange()
         end
         
         function obj = updateLowPassFilter(obj)
