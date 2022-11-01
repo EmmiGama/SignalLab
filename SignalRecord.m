@@ -163,8 +163,6 @@ classdef SignalRecord
         
         %% setters
         function obj = setOriginalSignal(obj, y, Fs)
-            y = y(:, 1);
-            
             duration = length(y) / Fs;
             t = linspace(0, duration, length(y));
             
