@@ -31,19 +31,16 @@ classdef RecordOperator < Singleton
             end
             
             if isequal(op, 'add')
-                [C, Fs] = obj.add(D, E);
-            elseif isequal(op, 'subtract')
-                [C, Fs] = obj.subtract(D, E);
-            elseif isequal(op, 'multiply')
-                [C, Fs] = obj.multiply(D, E);
-            elseif isequal(op, 'divide')
-                [C, Fs] = obj.divide(D, E);
-            elseif isequal(op, 'superposition')
-                [C, Fs] = obj.superposition(D, E);
-            elseif isequal(op, 'convolution')
-                [C, Fs] = obj.convolution(D, E);
+                E = B.originalSignal.Signal;
+            elseif isequal(whoA, 'subtract')
+                E = B.modifiedSignal.Signal;
+            elseif isequal(whoA, 'multiply')
+                [C, Fs] = obj.add(A, B);
+            elseif isequal(whoA, 'divide')
+            elseif isequal(whoA, 'superposition')
+            elseif isequal(whoA, 'convolution')
             else
-                [C, Fs] = obj.add(D, E);
+                E = B.originalSignal.Signal;
             end
             
        end
