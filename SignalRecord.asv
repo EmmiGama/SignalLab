@@ -163,13 +163,11 @@ classdef SignalRecord
         
         %% setters
         function obj = setOriginalSignal(obj, y, Fs)
-            y1 = y(:, 1);
-            
-            duration = length(y1) / Fs;
-            t = linspace(0, duration, length(y1));
+            duration = length(y) / Fs;
+            t = linspace(0, duration, length(y));
             
             signal.Fs = Fs;
-            signal.y = y1;
+            signal.y = y;
             signal.t = t;
             
             obj.originalSignal.duration = duration;
@@ -448,7 +446,7 @@ classdef SignalRecord
         function obj = updateLowPassFilter(obj)
             lim = obj.filters.low.lim;
             
-            [y, ~, Fs] = obj.getModifiedSignal();
+            [y, t, Fs] = obj.getModifiedSignal();
             
             Y = lowpass(y, lim, Fs);
             
@@ -465,13 +463,13 @@ classdef SignalRecord
                 obj.filters.high.lim = 0;
             end
             
-            obj = obj.StateChange();
+            obj = obj.StateChange()
         end
         
         function obj = updateHighPassFilter(obj)
             lim = obj.filters.high.lim;
             
-            [y, ~, Fs] = obj.getModifiedSignal();
+            [y, t, Fs] = obj.getModifiedSignal();
             
             Y = highpass(y, lim, Fs);
             
@@ -488,13 +486,13 @@ classdef SignalRecord
                 obj.filters.stop.lims = [0 0];
             end
             
-            obj = obj.StateChange();
+            obj.StateChange()
         end
         
         function obj = updateBandPassFilter(obj)
             lims = obj.filters.band.lims;
             
-            [y, ~, Fs] = obj.getModifiedSignal();
+            [y, t, Fs] = obj.getModifiedSignal();
             
             Y = bandpass(y, lims, Fs);
             
@@ -511,13 +509,13 @@ classdef SignalRecord
                 obj.filters.high.lims = [0 0];
             end
             
-            obj = obj.StateChange();
+            obj.StateChange() 
         end
         
         function obj = updateBandStopFilter(obj)
             lims = obj.filters.band.lims;
             
-            [y, ~, Fs] = obj.getModifiedSignal();
+            [y, t, Fs] = obj.getModifiedSignal();
             
             Y = bandstop(y, lims, Fs);
             
